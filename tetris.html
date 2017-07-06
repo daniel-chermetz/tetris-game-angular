@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="tetris">
+<head>
+<title>Simple Tetris game</title>
+<style>
+    body {
+        padding: 20px;
+    }
+    h4:first-child {
+        text-align: center;
+    }
+    .game-container {
+        text-align: center;
+    }
+    .game-grid {
+        display: table;
+        margin: 0 auto;
+        border: 4px solid black;
+        border-collapse: collapse;
+        cursor: pointer;
+    }
+    .grid-row {
+        display: table-row;
+    }
+    .grid-cell {
+        display: table-cell;
+        box-sizing: border-box;
+        height: 40px;
+        width: 40px;
+        border: 1px dotted gray;
+    }
+</style>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+<script src="tetris.js"></script>
+</head>
+<body ng-controller="gameCtrl">
+    <div class="well">
+        <h4>Simple Angular Tetris</h4>
+        <h4>Use the keyboard's arrow keys to play (to rotate, use the up arrow key, and the other arrow keys to move the brick). If the keys are unresponsive, click on the game grid to focus it.</h4>
+    </div>
+    <div class="game-container">
+        <h4>Score: {{gameSrvc.getGameScore()}}</h4>
+        <div class="game-grid">
+             <div class="grid-row" ng-repeat="row in gameSrvc.getGameGrid() track by $index">
+                <div class="grid-cell" ng-style="{'background-color': gameSrvc.getGridCellColor($parent.$index, $index)}" ng-repeat="col in gameSrvc.getGameGrid()[0] track by $index"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
